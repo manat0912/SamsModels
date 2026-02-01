@@ -47,41 +47,40 @@ def main():
     
     total_batches = (len(part_files) + BATCH_SIZE - 1) // BATCH_SIZE
     
-    for i in range(55, len(part_files), BATCH_SIZE):
-        batch = part_files[i:i+BATCH_SIZE]
-        batch_num = (i // BATCH_SIZE) + 1
-        print(f"Processing Batch {batch_num}/{total_batches} ({len(batch)} files)...")
+    # for i in range(55, len(part_files), BATCH_SIZE):
+    #     batch = part_files[i:i+BATCH_SIZE]
+    #     batch_num = (i // BATCH_SIZE) + 1
+    #     print(f"Processing Batch {batch_num}/{total_batches} ({len(batch)} files)...")
         
-        # Git Add
-        # Quote filenames to handle spaces/parentheses
-        quoted_batch = [f'"{f}"' for f in batch]
-        add_cmd = f"{GIT_CMD} add {' '.join(quoted_batch)}"
-        if not run_command(add_cmd):
-            print("Failed to add files")
-            exit(1)
+    #     # Git Add
+    #     # Quote filenames to handle spaces/parentheses
+    #     quoted_batch = [f'"{f}"' for f in batch]
+    #     add_cmd = f"{GIT_CMD} add {' '.join(quoted_batch)}"
+    #     if not run_command(add_cmd):
+    #         print("Failed to add files")
+    #         exit(1)
             
-        # Git Commit
-        commit_msg = f"Upload model parts batch {batch_num}"
-        if not run_command(f'{GIT_CMD} commit -m "{commit_msg}"'):
-            print("Failed to commit")
-            exit(1)
+    #     # Git Commit
+    #     commit_msg = f"Upload model parts batch {batch_num}"
+    #     if not run_command(f'{GIT_CMD} commit -m "{commit_msg}"'):
+    #         print("Failed to commit")
+    #         exit(1)
             
-        # Git Push
-        # Retry logic for push
-        max_retries = 3
-        success = False
-        for attempt in range(max_retries):
-            print(f"Pushing (Attempt {attempt+1}/{max_retries})...")
-            # Force push because we reset history
-            if run_command(f"{GIT_CMD} push origin main"):
-                success = True
-                break
-            print("Push failed, retrying in 5 seconds...")
-            time.sleep(5)
+    #     # Git Push
+    #     # Retry logic for push
+    #     max_retries = 3
+    #     success = False
+    #     for attempt in range(max_retries):
+    #         print(f"Pushing (Attempt {attempt+1}/{max_retries})...")
+    #         if run_command(f"{GIT_CMD} push origin main"):
+    #             success = True
+    #             break
+    #         print("Push failed, retrying in 5 seconds...")
+    #         time.sleep(5)
             
-        if not success:
-            print(f"Failed to push batch {batch_num} after retries. Manual intervention needed.")
-            exit(1)
+    #     if not success:
+    #         print(f"Failed to push batch {batch_num} after retries. Manual intervention needed.")
+    #         exit(1)
             
     # 4. Push remaining files
     print("Processing remaining files...")
