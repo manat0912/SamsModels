@@ -14,7 +14,7 @@ from gradio.themes import Soft
 from PIL import Image, ImageDraw, ImageFont
 from transformers import Sam3TrackerVideoModel, Sam3TrackerVideoProcessor, Sam3VideoModel, Sam3VideoProcessor
 
-MODEL_ID = "facebook/sam3"
+MODEL_ID = "./models/sam3"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 DTYPE = torch.bfloat16
 
