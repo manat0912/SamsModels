@@ -27,7 +27,7 @@ def merge_files(original_filename):
             print(f"Error removing file {part}: {e}")
 
 if __name__ == "__main__":
-    search_path = "app"
+    search_path = "."
     print(f"Scanning {search_path} for split files to merge...")
     
     # Set of base filenames to merge (to avoid duplicate processing)
