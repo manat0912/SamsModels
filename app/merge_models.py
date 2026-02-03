@@ -18,6 +18,14 @@ def merge_files(original_filename):
     
     print(f"Successfully merged {original_filename}")
 
+    print(f"Removing part files for {original_filename}...")
+    for part in parts:
+        try:
+            os.remove(part)
+            print(f"Removed {part}")
+        except OSError as e:
+            print(f"Error removing file {part}: {e}")
+
 if __name__ == "__main__":
     search_path = "app"
     print(f"Scanning {search_path} for split files to merge...")
