@@ -25,7 +25,7 @@ TEXT_VIDEO_MODEL = Sam3VideoModel.from_pretrained(MODEL_ID).to(DEVICE, dtype=DTY
 TEXT_VIDEO_PROCESSOR = Sam3VideoProcessor.from_pretrained(MODEL_ID)
 print("Models loaded successfully!")
 
-MAX_SECONDS = 8.0
+MAX_SECONDS = 3600.0
 
 
 def to_device_recursive(obj: Any, device: str | torch.device) -> Any:  # noqa: ANN401
